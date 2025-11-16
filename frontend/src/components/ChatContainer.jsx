@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore"
 import ChatHeader from "./ChatHeader";
@@ -17,6 +17,8 @@ function ChatContainer() {
   } = useChatStore();
   const { authUser } = useAuthStore();
 
+  const [ placeholderMsg, setPlaceholderMsg ] = useState("");
+
   const messageEndRef = useRef(null);
 
   useEffect(() => {
@@ -31,6 +33,10 @@ function ChatContainer() {
       messageEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
+
+  function handlePlaceholderMessageClick(msg) {
+    setPlaceholderMsg(msg)
+  }
 
   return (
     <>
@@ -68,11 +74,16 @@ function ChatContainer() {
         ) : isMessagesLoading 
           ? <MessagesLoadingSkeleton /> 
           : (
-            <NoChatHistoryPlaceholder name={selectedUser.fullName} />
+            <NoChatHistoryPlaceholder 
+              name={selectedUser.fullName}
+              onPlaceholderMessageClick={handlePlaceholderMessageClick} 
+            />
           )}
       </div>
 
-      <MessageInput />
+      <MessageInput 
+        placeholderMsg={placeholderMsg}
+      />
     </>
   )
 }
