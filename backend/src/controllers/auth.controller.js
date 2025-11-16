@@ -39,9 +39,6 @@ export const signup = async (req, res) => {
     });
 
     if (newUser) {
-      // generateToken(newUser._id, res);
-      // await newUser.save();
-
       const savedUser = await newUser.save();
       generateToken(savedUser._id, res);
 
@@ -60,8 +57,6 @@ export const signup = async (req, res) => {
     } else {
       res.status(400).json({ message: "Invalid user data" });
     }
-
-
 
   } catch (error) {
     console.log("Error in signup controller:", error);
