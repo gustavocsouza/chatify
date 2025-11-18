@@ -1,4 +1,5 @@
 import cloudinary from '../lib/cloudinary.js';
+import { emailTest } from '../lib/emailTest.js';
 import { getReceiverSocketId, io } from '../lib/socket.js';
 
 import Message from "../models/Message.js";
@@ -182,5 +183,8 @@ export const accept = async (req, res) => {
 }
 
 export const getInvitationRequests = async (req, res) => {
-  res.json(req.user.friendRequests);
+  const user = await User.findById(req.user._id)
+    .populate("friendRequests", "fullName email _id")
+
+  res.json(user.friendRequests);
 }

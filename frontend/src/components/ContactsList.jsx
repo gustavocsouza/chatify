@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useChatStore } from "../store/useChatStore";
 import UsersLoadingSkeleton from "./UsersLoadingSkeleton";
 import { useAuthStore } from "../store/useAuthStore";
+import InviteInput from "./InviteInput";
 
 function ContactsList() {
   const { getAllContacts, allContacts, setSelectedUser, isUsersLoading } = useChatStore();
@@ -15,6 +16,7 @@ function ContactsList() {
 
   return (
     <>
+      <InviteInput />
       {allContacts.map((contact) => (
         <div
           key={contact._id}
