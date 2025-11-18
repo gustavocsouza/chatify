@@ -4,9 +4,12 @@ import { arcjetProtection } from '../middleware/arcjet.middleware.js';
 import { protectRoute } from '../middleware/auth.middleware.js';
 
 import {
+  accept,
   getAllContacts,
   getChatPartners,
+  getInvitationRequests,
   getMessagesByUserId,
+  invite,
   sendMessage
 } from '../controllers/message.controller.js';
 
@@ -22,6 +25,11 @@ router.get("/chats", getChatPartners);
 router.get("/:id", getMessagesByUserId);
 
 router.post("/send/:id", sendMessage);
+
+
+router.post("/invite", invite);
+router.post("/accept", accept);
+router.get("/:userId/requests", getInvitationRequests);
 
 
 
