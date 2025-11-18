@@ -5,6 +5,7 @@ import { protectRoute } from '../middleware/auth.middleware.js';
 
 import {
   accept,
+  deleteContact,
   getAllContacts,
   getChatPartners,
   getInvitationRequests,
@@ -21,6 +22,7 @@ const router = express.Router();
 router.use(arcjetProtection, protectRoute);
 
 router.get("/contacts", getAllContacts);
+router.get("/delete-contact", deleteContact);
 router.get("/chats", getChatPartners);
 
 router.post("/invite", invite);
