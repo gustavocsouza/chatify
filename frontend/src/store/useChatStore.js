@@ -9,9 +9,11 @@ export const useChatStore = create((set, get) => ({
   allContacts: [],
   chats: [],
   messages: [],
+  requests: [],
   activeTab: "chats",
   selectedUser: null,
   isUsersLoading: false,
+  isRequestsLoading: false,
   isMessagesLoading: false,
   isSoundEnabled: JSON.parse(localStorage.getItem("isSoundEnabled")) === true,
 
@@ -42,6 +44,39 @@ export const useChatStore = create((set, get) => ({
       toast.error(error.response.data.message)
     } finally {
       set({ isUsersLoading: false });
+    }
+  },
+
+  invite: async (email) => {
+    try {
+      const res = await axiosInstance.post("/messages/invite", { email });
+      toast.success(res.data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  },
+
+  getAllRequests: async () => {
+    set({ isRequestsLoading: true });
+    try {
+      const res = await axiosInstance.get(`/messages/requests`);
+      set({ requests: res.data });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    } finally {
+      set({ isRequestsLoading: false });
+    }
+  },
+
+  acceptRequest: async (userToAcceptId) => {
+    try {
+      const { requests } = get();
+      const res = await axiosInstance.post("/messages/accept", { userToAcceptId });
+
+      set({ requests: requests.filter(request => request._id !== userToAcceptId) })
+      toast.success(res.data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   },
 

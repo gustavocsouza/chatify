@@ -22,14 +22,16 @@ router.use(arcjetProtection, protectRoute);
 
 router.get("/contacts", getAllContacts);
 router.get("/chats", getChatPartners);
+
+router.post("/invite", invite);
+router.post("/accept", accept);
+router.get("/requests", getInvitationRequests);
+
 router.get("/:id", getMessagesByUserId);
 
 router.post("/send/:id", sendMessage);
 
 
-router.post("/invite", invite);
-router.post("/accept", accept);
-router.get("/:userId/requests", getInvitationRequests);
 
 
 
