@@ -1,5 +1,5 @@
 import express from 'express';
-import { signup, login, logout, updateProfile, invite, accept, getInvitationRequests } from '../controllers/auth.controller.js';
+import { signup, login, logout, updateProfile } from '../controllers/auth.controller.js';
 import { protectRoute } from '../middleware/auth.middleware.js';
 import { arcjetProtection } from '../middleware/arcjet.middleware.js';
 
@@ -10,10 +10,6 @@ router.use(arcjetProtection);
 router.post("/signup", signup);
 router.post("/login", login);
 router.post("/logout", logout);
-
-router.post("/invite", invite);
-router.post("/accept", accept);
-router.get("/:userId/requests", getInvitationRequests);
 
 router.put("/update-profile", protectRoute, updateProfile);
 
