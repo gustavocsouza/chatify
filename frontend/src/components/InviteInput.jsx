@@ -21,6 +21,7 @@ function InviteInput() {
           placeholder="Email"
           className="input-invite h-10"
           value={emailToInvite}
+          type="email"
           onChange={(e) => setEmailToInvite(e.target.value)}
         />
         <button 

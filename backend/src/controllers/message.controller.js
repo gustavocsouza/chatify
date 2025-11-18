@@ -8,11 +8,29 @@ import User from "../models/User.js";
 export const getAllContacts = async (req, res) => {
   try {
     const loggedUserId = req.user._id;
-    const filteredUsers = await User.find({ _id: { $ne: loggedUserId } }).select("-password");
 
-    res.status(200).json(filteredUsers);
+    const user = await User.findById(loggedUserId)
+    .populate("friends", "fullName email _id")
+
+    res.json(user.friends);
   } catch (error) {
     console.error("Error in getAllContacts:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+export const deleteContact = async (req, res) => {
+  const loggedUserId = req.user._id;
+  const { contactId } = req.body; 
+
+  try {
+    await User.findByIdAndUpdate(loggedUserId, {
+      $pull: { friends:  contactId}
+    })
+
+    res.sendStatus(204);
+  } catch (error) {
+    console.log("Error in deleteContact controller:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 }
@@ -122,8 +140,6 @@ export const invite = async (req, res) => {
 
     const invitedUser = await User.findOne({ email: email });
     if (!invitedUser) return res.status(404).json({ message: "User not found" });
-
-    if (!fromUserId) return res.status(400).json({ message: "Not found logged user" });
 
     if (invitedUser._id.toString() === fromUserId.toString()) {
       return res.status(400).json({ message: "You cannot add yourself" });
