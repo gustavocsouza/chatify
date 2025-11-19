@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { LogOutIcon, VolumeOffIcon, Volume2Icon } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore";
+import InviteInput from "./InviteInput";
 
 const mouseClickSound = new Audio("/sounds/mouse-click.mp3");
 
@@ -27,8 +28,8 @@ function ProfileHeader() {
   }
 
   return (
-    <div className="p-6 border-b border-slate-700/50 ">
-      <div className="flex items-center justify-between">
+    <div className="sm:pt-6 pb-2 pr-6 pl-2 py-2 border-b border-slate-700/50 ">
+      <div className="sm:mb-6 mb-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           {/* Avatar */}
           <div className="avatar online">
@@ -92,6 +93,8 @@ function ProfileHeader() {
           </button> 
         </div>
       </div>
+      <InviteInput />
+
     </div>
   )
 }

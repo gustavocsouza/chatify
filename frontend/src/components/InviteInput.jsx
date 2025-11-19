@@ -15,7 +15,7 @@ function InviteInput() {
     <div>
       <p className="text-sm mb-1">Add new contact</p>
       <div
-        className="flex gap-2 mb-6"
+        className="flex gap-2"
       >
         <input 
           placeholder="Email"

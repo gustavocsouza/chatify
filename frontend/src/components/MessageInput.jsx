@@ -74,7 +74,7 @@ function MessageInput({ placeholderMsg }) {
       )}
 
       <form
-        className="max-w-3xl mx-auto flex space-x-4" 
+        className="max-w-3xl mx-auto flex gap-1 sm:gap-0 sm:space-x-4" 
         onSubmit={handleSendMessage}
       >
         <input
