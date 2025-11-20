@@ -53,7 +53,7 @@ function MessageInput({ placeholderMsg }) {
   }
 
   return (
-    <div className="p-4 border-t border-slate-700/50">
+    <div className="sm:p-4 p-1 border-t border-slate-700/50">
       {imagePreview && (
         <div className="max-w-3xl mx-auto mb-3 flex items-center">
           <div className="relative">
@@ -97,7 +97,7 @@ function MessageInput({ placeholderMsg }) {
         />
 
         <button
-          className={`bg-slate-800/50 text-slate-400 hover:text-slate-200 rounded-lg px-4 transition-colors ${
+          className={`bg-slate-800/50 text-slate-400 hover:text-slate-200 rounded-lg px-2 sm:px-4 transition-colors ${
             imagePreview ? "text-cyan-500" : ""
           }`}
           type="button"
@@ -107,7 +107,7 @@ function MessageInput({ placeholderMsg }) {
         </button>
         
         <button
-          className="bg-gradient-to-r from-cyan-500 to bg-cyan-600 text-white rounded-lg px-4 py-2 font-medium hover:from-cyan-600 hover:to-cyan-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-gradient-to-r from-cyan-500 to bg-cyan-600 text-white rounded-lg px-2 sm:px-4 py-2 font-medium hover:from-cyan-600 hover:to-cyan-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           type="submit"
           disabled={!text.trim() && !imagePreview}
         >

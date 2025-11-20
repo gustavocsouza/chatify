@@ -5,7 +5,6 @@ import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
 
 import UsersLoadingSkeleton from "./UsersLoadingSkeleton";
-import InviteInput from "./InviteInput";
 
 function ContactsList() {
   const { getAllContacts, allContacts, setSelectedUser, isUsersLoading } = useChatStore();
